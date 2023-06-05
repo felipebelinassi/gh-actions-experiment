@@ -1,2 +1,2 @@
 # gh-actions-experiment
-Just experiment with cray cray GH actions
+Just experimenting with cray cray GH actions
