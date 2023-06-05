@@ -16,6 +16,7 @@ jobs:
           git config user.name 'Dev'
           git config user.email 'dev@users.noreply.github.com'
           git commit -m "Trigger with empty commit" --allow-empty
+          git push
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v5
@@ -24,7 +25,7 @@ jobs:
           commit-message: PR commit
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          branch: "${{ github.ref }}-pr"
+          branch: ${{ github.ref }}
           base: main
           delete-branch: true
           title: 'Test PR'
