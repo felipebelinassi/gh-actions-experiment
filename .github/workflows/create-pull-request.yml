@@ -34,4 +34,4 @@ jobs:
           pr_label: "feature,automated"
           pr_draft: true                                    # Creates pull request as draft
           pr_allow_empty: true                              # Creates pull request even if there are no changes
-          github_token: ${{ github.token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
