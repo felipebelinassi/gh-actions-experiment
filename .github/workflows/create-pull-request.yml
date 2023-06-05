@@ -4,7 +4,18 @@ on:
   push:
     branches:
       - 'feature/**'
+permissions:
+  contents: write
 jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -m "Empty commit" --allow-empty
+          git push
   On-Branch-Created:
     runs-on: ubuntu-latest
     steps:
