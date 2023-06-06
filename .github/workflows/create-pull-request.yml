@@ -1,7 +1,6 @@
 name: Create PR based on new branch
 on:
-  workflow_dispatch:
-  push:
+  create:
     branches:
       - 'feature/**'
 permissions:
