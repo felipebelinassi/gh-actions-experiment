@@ -1,6 +1,5 @@
 name: Create PR based on new branch
-on:
-  create
+on: create
 permissions:
   contents: write
   pull-requests: write
