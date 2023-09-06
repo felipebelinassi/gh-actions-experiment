@@ -11,14 +11,15 @@ jobs:
       - uses: actions/checkout@v3
       - name: Create empty commit
         run: |
-          git config user.name 'Felipe'
-          git config user.email 'felipebelinassi@gmail.com'
+          git config user.name 'Github'
+          git config user.email 'noreply@github.com'
           git commit -m "Trigger with empty commit" --allow-empty
           git push
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
+          author: Felipe Belinassi <felipebelinassi@users.noreply.github.com>
           token: ${{ github.token }}
           branch: ${{ github.ref }}
           base: main
