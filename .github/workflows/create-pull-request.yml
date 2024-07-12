@@ -11,15 +11,14 @@ jobs:
       - uses: actions/checkout@v3
       - name: Create empty commit
         run: |
-          git config user.name 'Felipe'
-          git config user.email 'felipebelinassi@users.noreply.github.com'
+          git config user.name 'Github'
+          git config user.email 'noreply@github.com'
           git commit -m "Trigger with empty commit" --allow-empty
           git push
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v5
         with:
-          author: Felipe Belinassi <felipebelinassi@users.noreply.github.com>
           token: ${{ github.token }}
           branch: ${{ github.ref }}
           base: main
@@ -35,3 +34,15 @@ jobs:
         run: |
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
           echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+  addJiraDescription:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: felipebelinassi/jira-description-action@master
+        name: jira-description-action
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          jira-token: ${{ secrets.JIRA_TOKEN }}
+          jira-base-url: ${{ secrets.JIRA_BASE_URL }}
+          # skip-branches: '^(production-release|main|master|release\/v\d+)$' #optional 
+          custom-issue-number-regexp: '.*_(\d+)$' # Gets sprint ID
+          # jira-project-key: 'WT' #optional    
