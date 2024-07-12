@@ -1,0 +1,28 @@
+name: Create PR based on new branch
+on:
+  pull_request:
+    types: [opened]
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  fetch_pr_info:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Print Title of PR
+        run: echo The Title of your PR is ${{ github.event.pull_request.title }}
+      - name: Print Description of PR
+        run: echo The Title of your PR is ${{ github.event.pull_request.description }}
+
+  add_jira_description:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: felipebelinassi/jira-description-action@master
+        name: jira-description-action
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          jira-token: ${{ secrets.JIRA_TOKEN }}
+          jira-base-url: ${{ secrets.JIRA_BASE_URL }}
+          # skip-branches: '^(production-release|main|master|release\/v\d+)$' #optional 
+          custom-issue-number-regexp: '.*_(\d+)$' # Gets sprint ID
+          # jira-project-key: 'WT' #optional    

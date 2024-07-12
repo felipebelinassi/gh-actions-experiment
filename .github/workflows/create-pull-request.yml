@@ -4,7 +4,7 @@ permissions:
   contents: write
   pull-requests: write
 jobs:
-  createPullRequest:
+  create_pull_request:
     # if: ${{ contains(github.ref, 'refs/heads/feature/sprint/') }}
     runs-on: ubuntu-latest
     steps:
@@ -34,15 +34,3 @@ jobs:
         run: |
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
           echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
-  addJiraDescription:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: felipebelinassi/jira-description-action@master
-        name: jira-description-action
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          jira-token: ${{ secrets.JIRA_TOKEN }}
-          jira-base-url: ${{ secrets.JIRA_BASE_URL }}
-          # skip-branches: '^(production-release|main|master|release\/v\d+)$' #optional 
-          custom-issue-number-regexp: '.*_(\d+)$' # Gets sprint ID
-          # jira-project-key: 'WT' #optional    
