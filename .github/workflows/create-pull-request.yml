@@ -5,7 +5,7 @@ permissions:
   pull-requests: write
 jobs:
   createPullRequest:
-    if: ${{ contains(github.ref, 'refs/heads/feature/sprint/') }}
+    # if: ${{ contains(github.ref, 'refs/heads/feature/sprint/') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
