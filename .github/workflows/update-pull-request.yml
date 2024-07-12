@@ -26,3 +26,4 @@ jobs:
           # skip-branches: '^(production-release|main|master|release\/v\d+)$' #optional 
           custom-issue-number-regexp: '.*_(\d+)$' # Gets sprint ID
           # jira-project-key: 'WT' #optional    
+          use: 'branch'
