@@ -1,4 +1,4 @@
-name: Create PR based on new branch
+name: Update PR
 on:
   pull_request:
     types: [opened]
