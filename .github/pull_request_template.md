@@ -2,7 +2,9 @@
 
 Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context. List any dependencies that are required for this change.
 
-Fixes # (issue)
+## Issues 
+<!--jira-description-action-hidden-start-marker-->
+<!--jira-description-action-hidden-end-marker-->
 
 ## Type of change
 
