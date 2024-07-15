@@ -7,13 +7,9 @@ permissions:
   pull-requests: write
 jobs:
   add_jira_description:
-    # if: ${{ contains(github.event.pull_request.base.ref, 'feature/sprint/') }}
+    if: ${{ contains(github.head_ref, 'feature/sprint/') }}
     runs-on: ubuntu-latest
     steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
       - uses: as-ideas/jira-description-action@master
         name: Add JIRA details to PR description
         with:
