@@ -17,7 +17,7 @@ jobs:
   add_jira_description:
     runs-on: ubuntu-latest
     steps:
-      - uses: felipebelinassi/jira-description-action@master
+      - uses: as-ideas/jira-description-action@master
         name: jira-description-action
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
