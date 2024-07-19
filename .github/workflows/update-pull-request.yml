@@ -2,13 +2,12 @@ name: Update Sprint PR description
 on:
   pull_request:
     types: [opened]
-    branches:
-      - feature/sprint/*
 permissions:
   contents: write
   pull-requests: write
 jobs:
   add_jira_description:
+    if: ${{ contains(github.head_ref, 'feature/sprint/') }}
     runs-on: ubuntu-latest
     steps:
       - uses: as-ideas/jira-description-action@master
