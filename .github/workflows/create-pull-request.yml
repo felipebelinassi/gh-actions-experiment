@@ -1,11 +1,14 @@
 name: Create PR based on new branch
-on: create
+on:
+  create:
+    branches: 
+      - feature/sprint/**
 permissions:
   contents: write
   pull-requests: write
 jobs:
   create_pull_request:
-    # if: ${{ contains(github.ref, 'refs/heads/feature/sprint/') }}
+    if: ${{ contains(github.ref, 'refs/heads/feature/sprint/') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,7 +27,7 @@ jobs:
           base: main
           delete-branch: true
           title: 'Test PR'
-          body-path: .github/pull_request_template.md
+          body-path: .github/PULL_REQUEST_TEMPLATE/v1_pull_request_template.md
           labels: |
             feature
             automated
