@@ -1,13 +1,11 @@
 name: Create PR based on new branch
-on:
-  create:
-    branches: 
-      - feature/sprint/**
+on: create
 permissions:
   contents: write
   pull-requests: write
 jobs:
   create_pull_request:
+    if: ${{ contains(github.ref, 'refs/heads/feature/sprint/') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
