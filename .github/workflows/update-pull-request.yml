@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [opened]
     branches:
-      - feature/sprint/**
+      - feature/sprint/*
 permissions:
   contents: write
   pull-requests: write
