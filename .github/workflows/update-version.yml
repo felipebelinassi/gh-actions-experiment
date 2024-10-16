@@ -41,6 +41,6 @@ jobs:
         run: |
           git add package.json
           git commit -m "Bump version triggered by ${{ github.actor }}"
-          git push origin main
+          git push -u origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
