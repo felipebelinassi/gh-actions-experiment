@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Set env
         run: echo "RELEASE_VERSION=$(echo ${GITHUB_REF#refs/tags/} | sed 's/^v//g; s/[^0-9\.]//g')" >> $GITHUB_ENV
@@ -39,6 +41,9 @@ jobs:
 
       - name: Commit and push changes
         run: |
+          git fetch origin main
+          git checkout main
+          git pull origin main
           git add package.json
           git commit -m "Bump version triggered by ${{ github.actor }}"
           git push origin main
