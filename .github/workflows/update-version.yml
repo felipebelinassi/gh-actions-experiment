@@ -36,14 +36,13 @@ jobs:
 
       - name: Set Git user to triggering actor
         run: |
-          git config user.name 'Github'
-          git config user.email 'noreply@github.com'
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
 
       - name: Commit and push changes
         run: |
-          git fetch origin main
           git checkout main
-          git pull origin main
+          git pull
           git add package.json
           git commit -m "Bump version triggered by ${{ github.actor }}"
-          git push origin main
+          git push
