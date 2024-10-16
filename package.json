@@ -1,6 +1,6 @@
 {
   "name": "gh-actions-experiment",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "main": "index.js",
   "repository": "https://github.com/felipebelinassi/gh-actions-experiment.git",
   "author": "Felipe Belinassi <felipebelinassi@gmail.com>",
