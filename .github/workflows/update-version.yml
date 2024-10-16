@@ -39,7 +39,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git add package.json package-lock.json
+          git add package.json
           git commit -m "Bump version triggered by ${{ github.actor }}"
           git push origin main
         env:
