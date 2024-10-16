@@ -1,0 +1,46 @@
+name: Update repository package version
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set env
+        run: echo "RELEASE_VERSION=$(echo ${GITHUB_REF#refs/tags/} | sed 's/^v//g; s/[^0-9\.]//g')" >> $GITHUB_ENV
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Set package version
+        run: |
+          echo "Release version: ${{env.RELEASE_VERSION}}"
+          yarn config set version-git-tag false
+          yarn version --new-version ${{env.RELEASE_VERSION}}
+
+      - name: Set Git user to triggering actor
+        run: |
+          git config --local user.name "${{ github.actor }}"
+          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Commit and push changes
+        run: |
+          git add package.json package-lock.json
+          git commit -m "Bump version triggered by ${{ github.actor }}"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
