@@ -45,7 +45,8 @@ jobs:
 
   deploy-backend:
     name: Deploy Backend
-    if: github.event.inputs.confirmation == 'true' && github.event.inputs.deploy_backend == 'true'
+    if: github.event.inputs.confirmation == 'true' && github.event.inputs.deploy_backend == 'true
+    runs-on: ubuntu-latest
     steps:
       - name: Notify deployment success
         run: echo "Successfully deployed backend to production environment"
@@ -53,7 +54,8 @@ jobs:
 
   deploy-frontend:
     name: Deploy Frontend
-    if: github.event.inputs.confirmation == 'true' && github.event.inputs.deploy_frontend == 'true'
+    if: github.event.inputs.confirmation == 'true' && github.event.inputs.deploy_frontend == 'tru
+    runs-on: ubuntu-latest
     steps:
       - name: Notify deployment success
         run: echo "Successfully deployed Frontend to production environment"
@@ -61,6 +63,7 @@ jobs:
   deploy-lambda:
     name: Deploy Lambda
     if: github.event.inputs.confirmation == 'true' && github.event.inputs.deploy_lambda == 'true'
+    runs-on: ubuntu-latest
     steps:
       - name: Notify deployment success
         run: echo "Successfully deployed lambda to production environment"
