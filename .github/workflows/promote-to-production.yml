@@ -39,6 +39,7 @@ jobs:
     name: Deploy Infrastructure
     # We need to solve some IAM permission issues before we can deploy infra
     if: false #github.event.inputs.confirmation == 'true' && github.event.inputs.deploy_infrastructure == 'true'
+    runs-on: ubuntu-latest
     steps:
       - name: Notify deployment success
         run: echo "Successfully deployed infrastructure to production environment"
