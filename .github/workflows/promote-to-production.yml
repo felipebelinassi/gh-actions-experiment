@@ -8,26 +8,6 @@ on:
         required: true
         type: boolean
         default: false
-      deploy_infrastructure:
-        description: 'Deploy infrastructure changes'
-        required: false
-        type: boolean
-        default: false
-      deploy_backend:
-        description: 'Deploy backend changes'
-        required: false
-        type: boolean
-        default: false
-      deploy_frontend:
-        description: 'Deploy frontend changes'
-        required: false
-        type: boolean
-        default: false
-      deploy_lambda:
-        description: 'Deploy lambda changes'
-        required: false
-        type: boolean
-        default: false
       release_message:
         description: 'Release message for the deployment'
         required: true
@@ -35,40 +15,6 @@ on:
         default: 'Promoting staging to production'
 
 jobs:
-  deploy-infrastructure:
-    name: Deploy Infrastructure
-    # We need to solve some IAM permission issues before we can deploy infra
-    if: false #github.event.inputs.confirmation == 'true' && github.event.inputs.deploy_infrastructure == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify deployment success
-        run: echo "Successfully deployed infrastructure to production environment"
-
-  deploy-backend:
-    name: Deploy Backend
-    if: github.event.inputs.confirmation == 'true' && github.event.inputs.deploy_backend == 'true
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify deployment success
-        run: echo "Successfully deployed backend to production environment"
-      
-
-  deploy-frontend:
-    name: Deploy Frontend
-    if: github.event.inputs.confirmation == 'true' && github.event.inputs.deploy_frontend == 'tru
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify deployment success
-        run: echo "Successfully deployed Frontend to production environment"
-
-  deploy-lambda:
-    name: Deploy Lambda
-    if: github.event.inputs.confirmation == 'true' && github.event.inputs.deploy_lambda == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify deployment success
-        run: echo "Successfully deployed lambda to production environment"
-
   create-release:
     name: Create Release
     if: github.event.inputs.confirmation == 'true'
