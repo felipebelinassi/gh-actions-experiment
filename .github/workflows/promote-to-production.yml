@@ -13,6 +13,15 @@ on:
         required: true
         type: string
         default: 'Promoting staging to production'
+      bump_type:
+        description: 'Version bump type (major, minor, patch)'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+        default: patch
 
 jobs:
   create-release:
@@ -20,11 +29,23 @@ jobs:
     if: github.event.inputs.confirmation == 'true'
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          default_bump: ${{ github.event.inputs.bump_type }}
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: 'v${{ github.run_number }}'
-          release_name: 'Release v${{ github.run_number }}'
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          release_name: 'Release ${{ steps.tag_version.outputs.new_tag }}'
           body: ${{ github.event.inputs.release_message }}
           draft: false
           prerelease: false
