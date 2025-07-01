@@ -8,6 +8,16 @@ on:
         required: true
         type: boolean
         default: false
+      fake_build:
+        description: 'fake build'
+        required: false
+        type: boolean
+        default: false
+      setup_node:
+        description: 'setup node'
+        required: false
+        type: boolean
+        default: false
       release_message:
         description: 'Release message for the deployment'
         required: true
@@ -25,9 +35,24 @@ on:
       
 
 jobs:
+
+  fake-build:
+    name: Fake Build
+    if: github.event.inputs.confirmation == 'true' && github.event.inputs.fake_build == 'true'
+    runs-on: ubuntu-latest
+    uses: actions/checkout@v3
+
+  setup-node:
+    name: Setup Node
+    if: github.event.inputs.confirmation == 'true' && github.event.inputs.setup_node == 'true'
+    uses: actions/setup-node@v3
+    with:
+      node-version: '18'
+
   create-release:
     name: Create Release
-    if: github.event.inputs.confirmation == 'true'
+    needs: ['fake-build', 'setup-node']
+    if: github.event.inputs.confirmation == 'true' && success()
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
