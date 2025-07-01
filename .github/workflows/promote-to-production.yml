@@ -53,7 +53,8 @@ jobs:
   setup-node:
     name: Setup Node
     if: github.event.inputs.confirmation == 'true' && github.event.inputs.setup_node == 'true'
-    
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -62,7 +63,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          
+
   create-release:
     name: Create Release
     needs: ['fake-build', 'setup-node']
