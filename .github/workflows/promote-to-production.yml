@@ -70,7 +70,7 @@ jobs:
     if: >
       github.event.inputs.confirmation == 'true' &&
       needs.fake-build.result != 'failure' &&
-      needs.setup-node.result != 'failure' &&
+      needs.setup-node.result != 'failure'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
