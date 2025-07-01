@@ -47,11 +47,12 @@ jobs:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           name: 'Release ${{ steps.tag_version.outputs.new_tag }}'
           target_commitish: ${{ github.sha }}
+          
           body: |
             <div id="releaseData">
             <div><strong>type:</strong> <span class="type">${{ github.event.inputs.bump_type }}</span></div>
             <div><strong>description:</strong> <span class="description">${{ github.event.inputs.release_message }}</span></div>
-            <div><strong>commit id:</strong> <span class="commitId">${{ github.sha }}</span></div>
+            <div><strong>author:</strong> <span class="author">${{ github.action.author }}</span></div>
             </div>
           draft: false
           prerelease: false
