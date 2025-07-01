@@ -64,9 +64,17 @@ jobs:
         with:
           node-version: '18'
 
+  final_job:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs: [fake-build, setup-node]
+    steps:
+      - run: echo ${{ needs.setup-node.result }}
+
+
   create-release:
     name: Create Release
-    needs: ['fake-build', 'setup-node']
+    needs: [fake-build, setup-node]
     if: >
       github.event.inputs.confirmation == 'true' &&
       needs.fake-build.result != 'failure' &&
