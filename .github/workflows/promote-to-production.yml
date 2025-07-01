@@ -40,7 +40,6 @@ jobs:
     name: Fake Build
     if: github.event.inputs.confirmation == 'true' && github.event.inputs.fake_build == 'true'
     runs-on: ubuntu-latest
-    uses: actions/checkout@v3
 
   setup-node:
     name: Setup Node
