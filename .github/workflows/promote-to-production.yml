@@ -22,6 +22,7 @@ on:
           - minor
           - major
         default: patch
+      
 
 jobs:
   create-release:
@@ -52,7 +53,7 @@ jobs:
             <div id="releaseData">
             <div><strong>type:</strong> <span class="type">${{ github.event.inputs.bump_type }}</span></div>
             <div><strong>description:</strong> <span class="description">${{ github.event.inputs.release_message }}</span></div>
-            <div><strong>author:</strong> <span class="author">${{ github.action.author }}</span></div>
+            <div><strong>author:</strong> <span class="author">${{ github.actor }}</span></div>
             </div>
           draft: false
           prerelease: false
