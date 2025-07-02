@@ -74,10 +74,13 @@ jobs:
 
   create-release:
     name: Create Release
+    needs: [fake-build, setup-node]
     if: >
       github.event.inputs.confirmation == 'true' &&
-      jobs.fake-build.result != 'failure' &&
-      jobs.setup-node.result != 'failure'
+      (
+      needs.fake-build.result == 'success' ||
+      needs.setup-node.result == 'success'
+      )
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
