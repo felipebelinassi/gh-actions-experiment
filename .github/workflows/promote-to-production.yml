@@ -74,7 +74,6 @@ jobs:
 
   create-release:
     name: Create Release
-    needs: [fake-build, setup-node]
     if: >
       github.event.inputs.confirmation == 'true' &&
       (
