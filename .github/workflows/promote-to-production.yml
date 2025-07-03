@@ -110,8 +110,6 @@ jobs:
             <div><strong>type:</strong> <span class="type">${{ github.event.inputs.bump_type }}</span></div>
             <div><strong>description:</strong> <span class="description">${{ github.event.inputs.release_message }}</span></div>
             <div><strong>author:</strong> <span class="author">${{ github.actor }}</span></div>
-            <div><strong>changelog:</strong></div>
-            <pre>${{ steps.bump_release.outputs.changelog }}</pre>
             </div>
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
