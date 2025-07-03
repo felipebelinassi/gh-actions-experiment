@@ -87,6 +87,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Make bump_and_release.sh executable
+        run: chmod +x .github/scripts/bump_and_release.sh
+
       - name: Run custom bump/tag/release script
         id: bump_release
         run: |
