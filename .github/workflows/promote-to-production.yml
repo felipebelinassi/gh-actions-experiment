@@ -87,26 +87,28 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          default_bump: ${{ github.event.inputs.bump_type }}
+      - name: Run custom bump/tag/release script
+        id: bump_release
+        run: |
+          .github/scripts/bump_and_release.sh \
+            "${{ github.event.inputs.bump_type }}" \
+            "${{ github.event.inputs.release_message }}" \
+            "${{ github.actor }}"
+        shell: bash
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.tag_version.outputs.new_tag }}
-          name: 'Release ${{ steps.tag_version.outputs.new_tag }}'
+          tag_name: ${{ steps.bump_release.outputs.new_version }}
+          name: 'Release ${{ steps.bump_release.outputs.new_version }}'
           target_commitish: ${{ github.sha }}
           body: |
             <div id="releaseData">
             <div><strong>type:</strong> <span class="type">${{ github.event.inputs.bump_type }}</span></div>
             <div><strong>description:</strong> <span class="description">${{ github.event.inputs.release_message }}</span></div>
             <div><strong>author:</strong> <span class="author">${{ github.actor }}</span></div>
+            <div><strong>changelog:</strong></div>
+            <pre>${{ steps.bump_release.outputs.changelog }}</pre>
             </div>
-          draft: false
-          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
